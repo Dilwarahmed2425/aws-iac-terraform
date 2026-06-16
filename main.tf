@@ -30,3 +30,7 @@ module "ec2" {
 
   instance_profile = module.iam.instance_profile_name
 }
+
+module "s3" {
+  source = "./modules/s3"
+}
