@@ -11,6 +11,15 @@ resource "aws_instance" "web" {
 
   associate_public_ip_address = true
 
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              amazon-linux-extras install nginx1 -y
+              systemctl enable nginx
+              systemctl start nginx
+              echo "<h1>Terraform + AWS + Nginx</h1>" > /usr/share/nginx/html/index.html
+              EOF
+
   tags = {
     Name = "Terraform-EC2"
   }
